@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gg/Controller/HomeController.dart';
 import 'package:get/get.dart';
 import 'package:gg/View/MainScreen/LoginScreen.dart';
-
 import '../../shared/component/component.dart';
+import '../../shared/constant.dart';
 import '../cartScreen/CartScreen.dart';
 import '../categoriesScreen/catScreen.dart';
 import '../favoriteScreen/FavoriteScreen.dart';
@@ -93,7 +93,11 @@ class SecondPage extends StatelessWidget {
                   height: 10,
                 ),
                 DefaultIconButton(
-                    function: (){},
+                    function: (){
+                      Get.off(LoginScreen());
+                      token = '';
+                      showToast(text: 'You Logged out Successfully', state: ToastStates.SUCCESS);
+                    },
                     label: "LogOut",
                     icon: Icon(Icons.arrow_back_sharp)),
                 SizedBox(

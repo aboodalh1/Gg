@@ -13,23 +13,18 @@ void main() async{
   await CacheHelper.init();
   Widget ?widget;
   uId=CacheHelper.getData(key: 'uid');
-  print(uId);
-  if(uId!=null){
+  if(token!=null){
     widget=SecondPage();
-  }else{
+  }
+  else{
     widget=LoginScreen();
   }
-  bool? onBoarding=CacheHelper.getData(key: 'onBoarding');
+  //bool? onBoarding=CacheHelper.getData(key: 'onBoarding');
   token=CacheHelper.getData(key: 'token');
-  if(onBoarding!=null)
-  {
     if(token !=null)
       widget=SecondPage();
     else widget= LoginScreen();
-  }else
-  {
-    widget=LoginScreen();
-  }
+
   runApp(MyApp(
     startWidget:widget ,
   ));
@@ -43,7 +38,7 @@ class MyApp extends StatelessWidget {
       darkTheme: darkTheme,
       theme: lightTheme,
       debugShowCheckedModeBanner: false,
-      home: startWidget,
+      home: LoginScreen(),
     );
   }
 }

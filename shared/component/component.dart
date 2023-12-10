@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 Widget DefaultIconButton(
         {required void Function() function,
         required String label,
@@ -7,7 +7,7 @@ Widget DefaultIconButton(
     Container(
       decoration: BoxDecoration(
           gradient:
-              LinearGradient(colors: [Colors.greenAccent.shade700,Colors.teal],),
+              LinearGradient(colors: [Colors.blueAccent,Colors.blue,Colors.indigoAccent],),
           color: Colors.blue,
           borderRadius: BorderRadius.circular(10)),
       width: double.infinity,
@@ -37,7 +37,7 @@ Widget DefaultButton(
         {required void Function() function, required String label, context}) =>
     Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [Colors.greenAccent.shade700,Colors.teal]),
+        gradient: LinearGradient(colors: [Colors.blueAccent,Colors.blue,Colors.indigoAccent]),
         borderRadius: BorderRadiusDirectional.circular(10),
       ),
       height: 50,
@@ -55,18 +55,18 @@ Widget DefaultButton(
       ),
     );
 
-// void showToast({
-//   required String text,
-//   required ToastStates state,
-// })=>   Fluttertoast.showToast(
-//     msg: text ,
-//     toastLength: Toast.LENGTH_LONG,
-//     gravity: ToastGravity.BOTTOM,
-//     timeInSecForIosWeb: 2,
-//     backgroundColor: chooseToastColor(state: state),
-//     textColor: Colors.white,
-//     fontSize: 16.0
-// );
+void showToast({
+  required String text,
+  required ToastStates state,
+})=>   Fluttertoast.showToast(
+    msg: text ,
+    toastLength: Toast.LENGTH_LONG,
+    gravity: ToastGravity.BOTTOM,
+    timeInSecForIosWeb: 2,
+    backgroundColor: chooseToastColor(state: state),
+    textColor: Colors.white,
+    fontSize: 16.0
+);
 enum ToastStates { SUCCESS, ERROR, WARNING }
 
 Color chooseToastColor({required ToastStates state}) {

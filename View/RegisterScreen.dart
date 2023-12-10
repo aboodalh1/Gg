@@ -10,6 +10,7 @@ class RegisterScreen extends StatelessWidget {
   var phoneController = TextEditingController();
   var nameController = TextEditingController();
   var passwordController = TextEditingController();
+  var formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,18 +33,29 @@ class RegisterScreen extends StatelessWidget {
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                   ),
-                  colors: [Colors.greenAccent.shade700,Colors.teal],
+                  colors: [Colors.blueAccent,Colors.blue,Colors.indigoAccent],
                 ),
                 SizedBox(height: 20,),
-                Text("Name",
-                    style: Theme.of(context).textTheme.labelLarge),
+                Row(
+                  children: [
+                    SizedBox(width: 5,),
+                    Text("Name",
+                        style: Theme.of(context).textTheme.labelLarge),
+                  ],
+                ),
                 SizedBox(
                   height: 15,
                 ),
                 TextFormField(
+                  validator: (value){
+                    if(value!.isEmpty){
+                      return 'Username must\'t be empty';
+                    }
+                    else return null;
+                  },
                   controller: nameController,
                   decoration: InputDecoration(
-                    labelText: "Name",
+                    labelText: "Enter your Name",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15)),
                   ),
@@ -57,9 +69,15 @@ class RegisterScreen extends StatelessWidget {
                   height: 15,
                 ),
                 TextFormField(
+                  validator: (value){
+                    if(value!.isEmpty){
+                      return 'Number must\'t be empty';
+                    }
+                    else return null;
+                  },
                   controller: phoneController,
                   decoration: InputDecoration(
-                    labelText: "Number",
+                    labelText: "Enter your Number",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15)),
                   ),
@@ -73,16 +91,20 @@ class RegisterScreen extends StatelessWidget {
                   height: 15,
                 ),
                 TextFormField(
+                  validator: (value){
+                    if(value!.isEmpty){
+                      return 'Password must\'t be empty';
+                    }
+                    else return null;
+                  },
                   controller: passwordController,
                   obscureText: controller.Gg,
                   decoration: InputDecoration(
                     suffixIcon: MaterialButton(
                         onPressed: () {
-                          controller.isSecure();
-
-                        },
+                          controller.isSecure();},
                         child: controller.secureOrNot),
-                    labelText: "Password",
+                    labelText: "Enter your Password",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15)),
                   ),
@@ -90,7 +112,13 @@ class RegisterScreen extends StatelessWidget {
                 SizedBox(height: 20,),
 
                 DefaultButton(function: (){
-                  Get.to(SecondPage());
+                    controller.registerState(
+                      name: nameController.text,
+                      password: passwordController.text,
+                      phone: phoneController.text,
+                    );
+
+
                 },
                     label: 'Register',
                     context: context),

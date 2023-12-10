@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:gg/View/MainScreen/LoginScreen.dart';
 import 'package:gg/View/settingScreen/DarkMode/DarkModeScreen.dart';
 import 'package:gg/View/settingScreen/LanguageScreen/LanguageScreen.dart';
+import 'package:gg/shared/constant.dart';
 import '../../../Controller/SettingController/SettingController.dart';
+import '../../../Network/Local/cacheHelper.dart';
 import '../../../shared/component/component.dart';
 import 'package:get/get.dart';
 class SettingScreen extends StatelessWidget {
@@ -34,12 +36,12 @@ class SettingScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "asm al zlma",
+                          "${loginModel1!.user!.name}",
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
-                        Text("+963998632535",
+                        Text("${loginModel1!.user!.phone}",
                           style: Theme.of(context).textTheme.bodyMedium,),
-                        Text("created on: 26/11/2023",
+                        Text("${loginModel1!.user!.createdAt}",
                           style: Theme.of(context).textTheme.bodyMedium,)
                       ],
                     ),
@@ -94,9 +96,11 @@ class SettingScreen extends StatelessWidget {
                   height: 20,
                 ),
                 DefaultIconButton(
-                    function: (){
+                    function: () async{
+                      controller.logoutState();
                       Get.off(LoginScreen());
-                    },
+                      await CacheHelper.saveData(key: 'token', value: token);
+                         },
                     label: 'Logout',
                     icon: Icon(
                       Icons.arrow_back_sharp,
